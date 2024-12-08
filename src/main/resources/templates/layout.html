@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Employee Carbon Tracker</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<header>
+    <h1>Employee Carbon Tracker</h1>
+    <nav>
+        <ul>
+            <li><a th:href="@{/dashboard}">Dashboard</a></li>
+            <li th:if="${#authorization.expression('hasRole(\'ADMIN\')')}"><a th:href="@{/admin/dashboard}">Admin</a></li>
+            <li th:if="${#authorization.expression('hasRole(\'MANAGER\')')}"><a th:href="@{/manager/dashboard}">Manager</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <section layout:fragment="content"></section>
+</main>
+<footer>
+    <p>&copy; 2024 Employee Carbon Tracker</p>
+</footer>
+</body>
+</html>

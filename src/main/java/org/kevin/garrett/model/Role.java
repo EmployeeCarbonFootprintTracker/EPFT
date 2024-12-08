@@ -1,48 +1,23 @@
 package org.kevin.garrett.model;
 
 import jakarta.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
-
-
-/**
- * Represents a role in the application, like "USER" or "ADMIN".
- * Each role can be linked to multiple users, and users can have multiple roles.
- */
 @Entity
-@Table(name = "roles")
+@Table(name = "roles") // Explicitly maps to the 'roles' table
 public class Role {
 
-
-    // Unique ID for each role, generated automatically by the database
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // The name of the role (like "USER" or "ADMIN"), must be unique
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true) // Ensures 'name' cannot be null and is unique
     private String name;
 
-    /**
-     * Many-to-Many link with User class.
-     * Shows which users have this role.
-     *
-     * "mappedBy" points to the "roles" field in the User class,
-     * indicating that User handles this link.
-     *
-     * "EAGER" loading means the roles are loaded with the user data.
-     */
+    // Default constructor
+    public Role() {
+    }
 
-
-
-
-    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
-    private Set<User> users = new HashSet<>();
-
-    // Default constructor needed by JPA
-    public Role() {}
-
+    // Constructor with name
     public Role(String name) {
         this.name = name;
     }
@@ -62,13 +37,5 @@ public class Role {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
     }
 }

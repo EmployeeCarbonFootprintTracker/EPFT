@@ -1,4 +1,4 @@
-package org.kevin.garrett;
+package org.kevin.garrett.config;
 
 import org.kevin.garrett.model.Role;
 import org.kevin.garrett.model.User;
@@ -6,11 +6,11 @@ import org.kevin.garrett.repository.RoleRepository;
 import org.kevin.garrett.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.password.PasswordEncoder; // Import PasswordEncoder
+import org.springframework.stereotype.Component;
 
-@SpringBootApplication
-public class EpftApplication implements CommandLineRunner {
+@Component
+public class DataLoader implements CommandLineRunner {
 
     @Autowired
     private UserRepository userRepository;
@@ -18,13 +18,15 @@ public class EpftApplication implements CommandLineRunner {
     @Autowired
     private RoleRepository roleRepository;
 
-    public static void main(String[] args) {
-        SpringApplication.run(EpftApplication.class, args);
-    }
 
     @Override
     public void run(String... args) throws Exception {
         System.out.println("Initializing hardcoded users and roles...");
+
+       // BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); needed for Bcrypt
+        // NoOp for plain-text passwords
+
+
 
         // Create roles if they don't already exist
         Role roleAdmin = roleRepository.findByName("ROLE_ADMIN")

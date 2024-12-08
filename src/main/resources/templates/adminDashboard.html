@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Dashboard</title>
+</head>
+<body>
+<h1>Admin Dashboard</h1>
+
+<h2>Users</h2>
+<ul>
+    <li th:each="user : ${users}">
+        <span th:text="${user.username}">Username</span> - <span th:text="${user.email}">Email</span>
+    </li>
+</ul>
+
+<h2>Activities</h2>
+<ul>
+    <li th:each="activity : ${activities}">
+        <strong>User:</strong> <span th:text="${activity.user.username}">User</span><br>
+        <strong>Activity Type:</strong> <span th:text="${activity.activityType}">Activity Type</span><br>
+        <strong>CO2 Saved:</strong> <span th:text="${activity.co2Saved}">CO2 Saved</span> kg
+    </li>
+</ul>
+</body>
+</html>

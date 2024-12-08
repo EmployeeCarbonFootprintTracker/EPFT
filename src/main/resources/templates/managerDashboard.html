@@ -1,0 +1,13 @@
+<div xmlns:th="http://www.thymeleaf.org">
+    <h2>Team Summary</h2>
+    <p>Total CO2 Saved: <span th:text="${teamSummary.totalCo2Saved} + ' kg'"></span></p>
+    <h3>Team Members:</h3>
+    <ul>
+        <li th:each="member : ${teamSummary.members}">
+            <span th:text="${member.name}"></span>:
+            <span th:text="${member.co2Saved} + ' kg CO2'"></span>
+        </li>
+    </ul>
+    <h3>Reports:</h3>
+    <a th:href="@{/manager/reports/download}">Download Reports</a>
+</div>

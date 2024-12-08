@@ -1,4 +1,3 @@
-// src/main/java/org/kevin/garrett/model/User.java
 package org.kevin.garrett.model;
 
 import jakarta.persistence.*;
@@ -6,32 +5,33 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "users")
+@Table(name = "users") // Ensures explicit table mapping
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
     private String username;
-
-    @Column(nullable = false)
     private String password;
-
-    @Column(nullable = false, unique = true)
     private String email;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
+            name = "user_roles", // Junction table
+            joinColumns = @JoinColumn(name = "user_id"), // FK to users
+            inverseJoinColumns = @JoinColumn(name = "role_id") // FK to roles
     )
     private Set<Role> roles = new HashSet<>();
 
-    // Constructors
-    public User() {}
+    // Default constructor
+    public User() {
+    }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 
     public User(String username, String password, String email) {
         this.username = username;

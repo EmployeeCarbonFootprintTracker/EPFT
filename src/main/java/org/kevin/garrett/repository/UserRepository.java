@@ -2,15 +2,19 @@ package org.kevin.garrett.repository;
 
 import org.kevin.garrett.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import java.util.Optional;
+import java.util.List;
 
-/**
- * Handles all the database work for User. JpaRepository got the basics covered.
- */
-@Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    /**
-     * Finds a user by their username. No extra coding needed—Spring handles it.
-     */
-    User findByUsername(String username);
+
+    // Fetch users with a specific role name
+    @Query("SELECT u FROM User u JOIN u.roles r WHERE r.name = :roleName")
+    List<User> findUsersByRoleName(@Param("roleName") String roleName);
+
+    Optional<User> findByUsername(String username);
+
+    boolean existsByUsername(String username);
+
 }
