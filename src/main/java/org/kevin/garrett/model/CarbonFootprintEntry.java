@@ -23,7 +23,10 @@ public class CarbonFootprintEntry {
 
     // New Fields
     private String thermostatAdjustment;
-    private int degreeChange;
+
+    //private int degreeChange;
+    private Integer degreeChange; // Use the Integer wrapper type
+
     private int showerDuration;
     private String plantBasedMeals;
     private int mealCount;
