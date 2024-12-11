@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Carbon Footprint Form</title>
+</head>
+<body>
+<h1>Daily Carbon Footprint Form</h1>
+
+<form th:object="${entry}"
+      th:action="(${entry.id} != null) ? @{/employee/carbon-footprint/update/{id}(id=${entry.id})} : @{/employee/carbon-footprint/create}"
+      method="post">
+
+    <!-- Hidden ID Field (for updates) -->
+    <input type="hidden" th:field="*{id}" />
+
+    <!-- Transportation Section -->
+    <h2>Transportation</h2>
+    <label for="activityType">How did you commute today?</label>
+    <select id="activityType" th:field="*{activityType}">
+        <option value="Car">Car (solo)</option>
+        <option value="Carpool">Carpool</option>
+        <option value="Public Transit">Public Transit</option>
+        <option value="Bike">Bike</option>
+        <option value="Walk">Walk</option>
+        <option value="Electric Vehicle">Electric Vehicle</option>
+        <option value="Work from Home">Work from Home</option>
+    </select><br><br>
+
+    <label for="distance">How far did you travel (miles)?</label>
+    <input type="number" id="distance" th:field="*{distance}" min="0" step="0.1"><br><br>
+
+    <label for="carType">Car Type (if applicable):</label>
+    <select id="carType" th:field="*{carType}">
+        <option value="">-- Select --</option>
+        <option value="Gasoline">Gasoline</option>
+        <option value="Diesel">Diesel</option>
+        <option value="Hybrid">Hybrid</option>
+        <option value="Electric">Electric</option>
+    </select><br><br>
+
+    <!-- Home Energy Section -->
+    <h2>Home Energy</h2>
+    <label for="thermostatAdjustment">Did you adjust your thermostat today?</label>
+    <select id="thermostatAdjustment" th:field="*{thermostatAdjustment}">
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+    </select><br><br>
+
+    <label for="degreeChange">If yes, by how many degrees?</label>
+    <input type="number" id="degreeChange" th:field="*{degreeChange}" min="1" max="5"><br><br>
+
+    <!-- Showers Section -->
+    <h2>Showers</h2>
+    <label for="showerDuration">How long was your shower today (minutes)?</label>
+    <input type="number" id="showerDuration" th:field="*{showerDuration}" min="0" step="1"><br><br>
+
+    <!-- Food Choices Section -->
+    <h2>Food Choices</h2>
+    <label for="plantBasedMeals">Did you eat a plant-based meal today?</label>
+    <select id="plantBasedMeals" th:field="*{plantBasedMeals}">
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+        <option value="Partially">Partially</option>
+    </select><br><br>
+
+    <label for="mealCount">If yes, how many meals?</label>
+    <input type="number" id="mealCount" th:field="*{mealCount}" min="1" max="3"><br><br>
+
+    <!-- Waste Management Section -->
+    <h2>Waste Management</h2>
+    <label for="wasteType">Did you recycle or compost today?</label>
+    <select id="wasteType" th:field="*{wasteType}">
+        <option value="Recycle">Recycle</option>
+        <option value="Compost">Compost</option>
+        <option value="Both">Both</option>
+        <option value="Neither">Neither</option>
+    </select><br><br>
+
+    <label for="wasteAmount">How much waste did you divert (lbs)?</label>
+    <input type="number" id="wasteAmount" th:field="*{wasteAmount}" min="0" step="0.1"><br><br>
+
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>
+
